@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //Add submit event listener to search form:
     document.querySelector('form#github-form').addEventListener('submit', handleSubmit)
 
-
-// Event handler function:
 function handleSubmit(e) {
     e.preventDefault();
     fetchUsers(e.target.search.value);
 }
 
-// Fetch all user objects for provided user input:
+// Fetch  function for all user objects for provided user input:
 function fetchUsers(user) {
     fetch(`https://api.github.com/search/users?q=${user}`, {
         Accept: 'application/vnd.github.v3+json'
@@ -18,7 +15,7 @@ function fetchUsers(user) {
     .then(json => json.items.forEach(user => createUserList(user)))
 }
 
-// Create a new user list item for provided user and append to DOM:
+
 function createUserList(user) {
     let li = document.createElement('li');
     li.className = 'user';
@@ -38,7 +35,7 @@ function createUserList(user) {
     document.querySelector('#user-list').appendChild(li);
 }
 
-// Fetch all user repo objects for clicked user:
+// Fetch function for all user repo objects for clicked user:
 function fetchRepos(userName) {
     fetch(`https://api.github.com/users/${userName}/repos`, {
         Accept: 'application/vnd.github.v3+json'
@@ -47,7 +44,7 @@ function fetchRepos(userName) {
     .then(json => json.forEach(repo => createRepoList(repo)))
 }
 
-// Create a new repo list item for provided user and append to DOM:
+
 function createRepoList(repo) {
     let li = document.createElement('li');
     li.className = 'repo';
